@@ -16,10 +16,17 @@
         <router-link to="/add-product" v-if="username" class="hover:text-blue-300">Add Product</router-link>
         <router-link to="/login" v-if="!username" class="hover:text-blue-300">Login</router-link>
         <router-link to="/register" v-if="!username" class="hover:text-blue-300">Register</router-link>
-        <button v-if="username" @click="logout"
-          class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
-          <!-- <LogOut class="text-black bg-green-700" /> -->
-          Logout
+        <button v-if="username" @click="logout">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger class="flex">
+                <LogOut class="rounded-r-full bg-gradient-to-l from-black to-blue-600 transition" />
+              </TooltipTrigger>
+              <TooltipContent class="bg-red-500 border-none text-white font-bold">
+                <p class="">Logout</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </button>
       </div>
     </nav>
@@ -33,6 +40,7 @@
 import { Toaster } from '@/components/ui/sonner';
 import Footer from './views/Footer.vue';
 import { Search, LogOut } from 'lucide-vue-next';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { toast } from 'vue-sonner'
 
 
@@ -40,6 +48,11 @@ export default {
   components: {
     Toaster,
     Footer,
+    LogOut,
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger
   },
   data() {
     return {

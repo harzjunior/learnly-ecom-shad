@@ -140,7 +140,7 @@
 </template>
 
 <script setup>
-import { FilePenLine, Trash2, Save, CircleUser, X } from 'lucide-vue-next';
+import { FilePenLine, Trash2, Save, CircleUser, LogOut, X } from 'lucide-vue-next';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { ref } from 'vue';
