@@ -42,9 +42,14 @@
         </div>
       </div>
       <!-- Right Section: Image -->
-      <div class="hidden lg:block">
-        <img src="https://wallpapercave.com/wp/wp7969113.jpg" alt="Image"
-          class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale" />
+       <div class="relative hidden lg:block overflow-hidden">
+        <img src="https://wallpapercave.com/wp/wp7969113.jpg" alt="Image" class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale" />
+        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-8">
+          <h2 class="text-5xl font-extrabold mb-4 animate-pulse">Join Us Today!</h2>
+          <p class="text-lg mb-4 animate-fade-in">Become a member and enjoy exclusive benefits.</p>
+          <p class="text-md">Already have an account? Login and explore more!</p>
+          <router-link to="/login" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Login</router-link>
+        </div>
       </div>
     </div>
     <!-- <Footer /> -->

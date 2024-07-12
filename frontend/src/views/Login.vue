@@ -40,9 +40,19 @@
           </div>
         </div>
       </div>
-      <div class="hidden bg-muted lg:block">
+       <!-- Right Section: Image -->
+      <div class="relative hidden lg:block overflow-hidden">
         <img src="https://wallpapercave.com/wp/wp7969113.jpg" alt="Image" width="1920" height="1080"
-          class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale" />
+          class="h-full w-full object-cover" />
+        <div
+          class="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-black via-transparent to-black">
+          <div class="text-center px-8 py-4 text-white backdrop-blur-md bg-black bg-opacity-50 rounded-lg shadow-lg">
+            <h2 class="text-5xl font-extrabold mb-4 animate-pulse">Welcome Back!</h2>
+            <p class="text-lg mb-4 animate-fade-in">We're glad to see you again. Please login to access your account.
+            </p>
+            <p class="text-md">New here? Sign up and join our community!</p>
+          </div>
+        </div>
       </div>
     </div>
     <!-- <Footer /> -->
@@ -107,3 +117,27 @@ export default {
   }
 };
 </script>
+
+<style>
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-in-out;
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(10px);
+}
+</style>

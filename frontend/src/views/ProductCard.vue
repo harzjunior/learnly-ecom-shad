@@ -30,7 +30,8 @@
                         <AlertDialogHeader>
                             <AlertDialogTitle class="text-green-600 font-bold">Confirm Edit</AlertDialogTitle>
                             <AlertDialogDescription>
-                                This action will update the product information. Please ensure that all details are correct before proceeding.
+                                This action will update the product information. Please ensure that all details are
+                                correct before proceeding.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -60,7 +61,8 @@
                         <AlertDialogHeader>
                             <AlertDialogTitle class="text-blue-600 font-bold">Confirm Save</AlertDialogTitle>
                             <AlertDialogDescription>
-                                This action will update the product information. Please ensure that all details are correct before proceeding.
+                                This action will update the product information. Please ensure that all details are
+                                correct before proceeding.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -71,7 +73,8 @@
                 </AlertDialog>
 
                 <!-- Cancel button -->
-                <Button v-if="username && product.editMode" @click="cancelEdit" variant="destructive" class="text-gray-500 hover:text-gray-600">
+                <Button v-if="username && product.editMode" @click="cancelEdit" variant="destructive"
+                    class="text-gray-500 hover:text-gray-600">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -104,7 +107,8 @@
                         <AlertDialogHeader>
                             <AlertDialogTitle class="text-red-500">Are you absolutely sure?</AlertDialogTitle>
                             <AlertDialogDescription>
-                                This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+                                This action cannot be undone. This will permanently delete your account and remove your
+                                data from our servers.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -115,18 +119,23 @@
                 </AlertDialog>
             </div>
             <div v-if="product.editMode" class="mt-4">
-                <label for="editName" class="block text-lg font-semibold">Name:</label>
-                <input type="text" v-model="product.updatedName" id="editName" class="w-full text-gray-900 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                <label for="editDescription" class="block text-lg font-semibold mt-4">Description:</label>
-                <input type="text" v-model="product.updatedDescription" id="editDescription" class="w-full text-gray-900 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                <label for="editPrice" class="block text-lg font-semibold mt-4">Price:</label>
-                <input type="number" v-model="product.updatedPrice" id="editPrice" class="w-full text-gray-900 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                <label for="editImageURL" class="block text-lg font-semibold mt-4">Image URL:</label>
-                <input type="text" v-model="product.updatedImageURL" id="editImageURL" class="w-full text-gray-900 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                <label for="editName" class="block text-start text-lg font-semibold">Name:</label>
+                <input type="text" v-model="product.updatedName" id="editName"
+                    class="w-full text-gray-200 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                <label for="editDescription" class="block text-start text-lg font-semibold mt-4">Description:</label>
+                <input type="text" v-model="product.updatedDescription" id="editDescription"
+                    class="w-full text-gray-200 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                <label for="editPrice" class="block text-start text-lg font-semibold mt-4">Price:</label>
+                <input type="number" v-model="product.updatedPrice" id="editPrice"
+                    class="w-full text-gray-200 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                <label for="editImageURL" class="block text-start text-lg font-semibold mt-4">Image URL:</label>
+                <input type="text" v-model="product.updatedImageURL" id="editImageURL"
+                    class="w-full text-gray-200 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                 <p v-if="product.errorMessage" class="mt-4 text-red-500 text-center">{{ product.errorMessage }}</p>
             </div>
         </div>
-        <button v-if="!product.editMode" @click="buyProduct" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded focus:outline-none mt-4 w-full">Sell</button>
+        <button v-if="!product.editMode" @click="buyProduct"
+            class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded focus:outline-none mt-4 w-full">Sell</button>
     </div>
 </template>
 
