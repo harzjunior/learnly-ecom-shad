@@ -1,36 +1,61 @@
+<!-- frontend/src/views/Login.vue -->
 <template>
-  <div class="flex flex-col items-center justify-between min-h-screen bg-gray-200 pt-40 bg-cover bg-center bg-no-repeat" 
-  style="background-image: url('https://wallpapercave.com/wp/wp7969113.jpg')">
-    <div class=" bg-white p-8 rounded-lg shadow-lg w-full max-w-lg mb-6">
-    <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Login</h1>
-    <form @submit.prevent="login">
-      <div class="mb-4">
-        <label for="username" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Username:</label>
-        <input type="text" v-model="loginUsername" id="username"
-          class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+  <div class="flex flex-col items-center justify-between min-h-screen bg-[#242424] text-gray-50 mt-1 -mb-5 ">
+    <!-- login -->
+    <div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+      <div class="flex items-center justify-center py-12">
+        <div class="mx-auto grid w-[350px] gap-6">
+          <div class="grid gap-2 text-center">
+            <h1 class="text-3xl font-bold">Login</h1>
+            <p class="text-balance text-muted-foreground text-gray-300">Enter your username below to login to your
+              account</p>
+          </div>
+          <!-- form -->
+          <form @submit.prevent="login">
+            <div class="grid gap-4">
+              <div class="grid gap-2">
+                <label for="username" class="block text-lg font-semibold text-gray-300 mb-2 text-left">Username</label>
+                <input type="text" id="username" v-model="loginUsername"
+                  class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required />
+              </div>
+              <div class="grid gap-2">
+                <div class="flex items-center">
+                  <label for="password"
+                    class="block text-lg font-semibold text-gray-300 mb-2 text-left">Password</label>
+                  <a href="/forgot-password" class="ml-auto inline-block text-sm underline">Forgot your password?</a>
+                </div>
+                <input id="password" v-model="loginPassword" type="password"
+                  class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required />
+              </div>
+              <button type="submit"
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4">Login</button>
+              <p v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</p>
+            </div>
+          </form>
+          <div class="mt-4 text-center text-sm">
+            Don't have an account? <router-link to="/register" class="underline">Sign up</router-link>
+            <!-- <a href="#" class="underline">Sign up</a> -->
+          </div>
+        </div>
       </div>
-      <div class="mb-4">
-        <label for="password" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Password:</label>
-        <input type="password" v-model="loginPassword" id="password"
-          class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+      <div class="hidden bg-muted lg:block">
+        <img src="https://wallpapercave.com/wp/wp7969113.jpg" alt="Image" width="1920" height="1080"
+          class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale" />
       </div>
-      <button type="submit"
-        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4">
-        Login
-      </button>
-      <p v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</p>
-    </form>
-  </div>
-  <Footer />
+    </div>
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
-import Footer from './Footer.vue';
+// import Footer from './Footer.vue';
+import { toast } from 'vue-sonner';
 
 export default {
   components: {
-    Footer
+    // Footer
   },
   data() {
     return {
@@ -63,10 +88,11 @@ export default {
           if (data.error) {
             this.errorMessage = data.message;
           } else {
+            toast.success("Logged Successfully");
             console.log('User logged in:', data);
-            localStorage.setItem('token', data.token); // Store token in localStorage
-            localStorage.setItem('username', data.username); // Store username in localStorage
-            this.$root.username = this.loginUsername; // Use this.loginUsername to set the root username
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('username', data.username);
+            this.$root.username = this.loginUsername;
             this.loginUsername = '';
             this.loginPassword = '';
             this.errorMessage = '';

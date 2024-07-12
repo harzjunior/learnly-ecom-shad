@@ -1,5 +1,7 @@
 # Global ignores
 node_modules/
+appVue.md
+presentation.md
 logs/
 *.log
 npm-debug.log*

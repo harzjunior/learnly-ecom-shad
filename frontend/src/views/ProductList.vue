@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col items-center justify-between min-h-screen bg-gray-200 mt-1 mb-10 pt-10">
+  <div class="flex flex-col items-center justify-between min-h-screen bg-[#242424] mt-1 mb-0 py-10">
     <div class="w-full max-w-5xl">
       <!-- Search input field -->
       <div class="md:flex flex-col md:flex-row items-center justify-between mb-10">
-        <h1 class="text-4xl text-center font-bold text-gray-800 px-20 mb-5 md:mb-0">Product List</h1>
+        <h1 class="text-4xl text-center font-bold text-gray-50 px-20 mb-5 md:mb-0">Product List</h1>
         <div class="">
           <form class="ml-auto flex-1 sm:flex-initial">
             <div class="relative">
@@ -15,12 +15,12 @@
         </div>
       </div>
 
-      <h2 class="text-2xl text-center font-bold mb-10 text-gray-600">Welcome {{ username }}</h2>
+      <h2 class="text-2xl text-center font-bold mb-10 text-gray-200">Welcome {{ username }}</h2>
       <div v-if="loading" class="text-center">
         <p>Loading products...</p>
       </div>
       <div v-else>
-        <div v-if="products.length === 0" class="text-center text-gray-500">
+        <div v-if="products.length === 0" class="text-center text-gray-50">
           <p>No products available.</p>
         </div>
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -31,16 +31,17 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import ProductCard from './ProductCard.vue';
-import Footer from './Footer.vue';
+// import Footer from './Footer.vue';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-vue-next';
+import { toast } from 'vue-sonner'
 
 // Props
 const props = defineProps({
@@ -98,6 +99,7 @@ const cancelEdit = (product) => {
   product.updatedDescription = product.description;
   product.updatedPrice = product.price;
   product.updatedImageURL = product.imageURL;
+  toast.success("Edit Canceled Successfully"); //shad-cn
 };
 
 const saveProduct = (product) => {
@@ -122,8 +124,10 @@ const saveProduct = (product) => {
   })
     .then(response => {
       if (response.ok) {
+        toast.success("Product Successfully updated"); //shad-cn
         return response.json();
       }
+      toast.error("Failed to update the product"); //shad-cn
       throw new Error('Failed to update product');
     })
     .then(data => {
@@ -142,8 +146,10 @@ const deleteProduct = (productId) => {
   })
     .then(response => {
       if (response.ok) {
+        toast.success("Product successfully deleted"); //shad-cn
         return response.json();
       }
+      toast.error("Failed to delete the product"); //shad-cn
       throw new Error('Failed to delete product');
     })
     .then(data => {

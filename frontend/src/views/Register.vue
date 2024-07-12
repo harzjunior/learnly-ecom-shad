@@ -1,41 +1,63 @@
+<!-- frontend/src/views/Register.vue -->
 <template>
-  <div class="flex flex-col items-center justify-between min-h-screen bg-gray-200 pt-40 bg-cover bg-center bg-no-repeat"
-    style="background-image: url('https://wallpapercave.com/wp/wp7969113.jpg')">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg mb-6">
-      <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Register</h1>
-      <form @submit.prevent="register">
-        <div class="mb-4">
-          <label for="username" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Username:</label>
-          <input type="text" v-model="username" id="username"
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+  <div class="flex flex-col items-center justify-between min-h-screen bg-[#242424] text-gray-50 mt-1 -mb-5 pt-1">
+    <!-- Register -->
+    <div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+      <!-- Left Section: Form -->
+      <div class="flex items-center justify-center py-12">
+        <div class="mx-auto grid w-[350px] gap-6">
+          <div class="grid gap-2 text-center">
+            <h1 class="text-3xl font-bold">Register</h1>
+            <p class="text-balance text-muted-foreground text-gray-300">Create your account</p>
+          </div>
+          <!-- Form -->
+          <form @submit.prevent="register">
+            <div class="grid gap-4">
+              <div class="grid gap-2">
+                <label for="username" class="block text-lg font-semibold text-gray-300 mb-2 text-left">Username</label>
+                <input type="text" id="username" v-model="username"
+                  class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required />
+              </div>
+              <div class="grid gap-2">
+                <label for="email" class="block text-lg font-semibold text-gray-300 mb-2 text-left">Email</label>
+                <input type="email" id="email" v-model="email"
+                  class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required />
+              </div>
+              <div class="grid gap-2">
+                <label for="password" class="block text-lg font-semibold text-gray-300 mb-2 text-left">Password</label>
+                <input type="password" id="password" v-model="password"
+                  class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required />
+              </div>
+              <button type="submit"
+                class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 mt-4">Register</button>
+              <p v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</p>
+            </div>
+          </form>
+          <div class="mt-4 text-center text-sm">
+            Already have an account? <router-link to="/login" class="underline">Login</router-link>
+          </div>
         </div>
-        <div class="mb-4">
-          <label for="email" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Email:</label>
-          <input type="email" v-model="email" id="email"
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-        </div>
-        <div class="mb-4">
-          <label for="password" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Password:</label>
-          <input type="password" v-model="password" id="password"
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-        </div>
-        <button type="submit"
-          class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 mt-4">
-          Register
-        </button>
-        <p v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</p>
-      </form>
+      </div>
+      <!-- Right Section: Image -->
+      <div class="hidden lg:block">
+        <img src="https://wallpapercave.com/wp/wp7969113.jpg" alt="Image"
+          class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale" />
+      </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
-import Footer from './Footer.vue';
+// import Footer from './Footer.vue';
+import { toast } from 'vue-sonner';
 
 export default {
   components: {
-    Footer
+    // Footer
   },
   data() {
     return {
@@ -58,8 +80,7 @@ export default {
         password: this.password
       };
 
-      // fetch('http://localhost:5050/api/register', {
-      fetch('https://learnly-ecom-fullstack.vercel.app/api/register', {
+      fetch('http://localhost:5050/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -71,7 +92,7 @@ export default {
           if (data.error) {
             this.errorMessage = data.message;
           } else {
-            console.log('User registered:', data);
+            toast.success("Successfully registered");
             this.username = '';
             this.email = '';
             this.password = '';

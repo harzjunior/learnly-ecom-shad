@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded-lg shadow-md overflow-hidden">
+    <div class="h-screen bg-[#242424] text-gray-50 rounded-lg shadow-md overflow-hidden">
         <img :src="imageUrl" :alt="altText" class="w-full h-64 object-cover">
         <div class="p-4">
             <h3 class="text-xl font-bold">{{ title }}</h3>
