@@ -5,39 +5,39 @@
       <form @submit.prevent="addProduct">
         <div class="mb-4">
           <label for="name" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Name:</label>
-          <input type="text" v-model="name" id="name" required
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 ease-in-out" />
+          <input type="text" v-model="name" id="name"
+            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
         </div>
         <div class="mb-4">
           <label for="description" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Description:</label>
-          <textarea v-model="description" id="description" required rows="4"
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 ease-in-out"></textarea>
+          <input type="text" v-model="description" id="description"
+            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
         </div>
         <div class="mb-4">
           <label for="price" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Price:</label>
-          <input type="number" v-model="price" id="price" step="0.01" required
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 ease-in-out" />
+          <input type="number" v-model="price" id="price" step="0.01"
+            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
         </div>
         <div class="mb-4">
           <label for="imageURL" class="block text-lg font-semibold text-gray-700 mb-2 text-left">Image URL:</label>
-          <input type="text" v-model="imageURL" id="imageURL" required
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 ease-in-out" />
+          <input type="text" v-model="imageURL" id="imageURL"
+            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
         </div>
-        <button type="submit" :disabled="loading"
-          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4 transition duration-200 ease-in-out">
-          <span v-if="loading">Adding...</span>
-          <span v-else>Add Product</span>
+        <button type="submit"
+          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4">
+          Add Product
         </button>
-        <p v-if="errorMessage" class="mt-4 text-red-500 text-center font-semibold">{{ errorMessage }}</p>
-        <p v-if="successMessage" class="mt-4 text-green-500 text-center font-semibold">{{ successMessage }}</p>
+        <p v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</p>
       </form>
     </div>
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+// import Footer from './Footer.vue';
 import { toast } from 'vue-sonner';
 
 const router = useRouter();
@@ -47,16 +47,12 @@ const description = ref('');
 const price = ref('');
 const imageURL = ref('');
 const errorMessage = ref('');
-const successMessage = ref('');
-const loading = ref(false);
 
 const addProduct = () => {
   if (!name.value || !description.value || !price.value || !imageURL.value) {
     errorMessage.value = 'Please fill in all fields';
     return;
   }
-
-  loading.value = true;
 
   const newProduct = {
     name: name.value,
@@ -74,13 +70,11 @@ const addProduct = () => {
   })
     .then(response => response.json())
     .then(data => {
-      loading.value = false;
       if (data.error) {
         errorMessage.value = data.message;
         toast.error("Failed to add product");
       } else {
         console.log('Product added:', data);
-        successMessage.value = 'Product added successfully!';
         name.value = '';
         description.value = '';
         price.value = '';
@@ -91,13 +85,8 @@ const addProduct = () => {
       }
     })
     .catch(error => {
-      loading.value = false;
       console.error('Error adding product:', error);
       errorMessage.value = 'An error occurred. Please try again.';
     });
 };
 </script>
-
-<style>
-/* Add any additional styling here */
-</style>
